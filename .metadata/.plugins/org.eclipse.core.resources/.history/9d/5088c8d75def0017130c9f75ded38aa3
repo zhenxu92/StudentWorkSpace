@@ -1,0 +1,24 @@
+package textExcel;
+
+public class TextCell implements Cell
+{
+	// data field
+	private String str;
+	
+	
+	
+	@Override
+	public String abbreviatedCellText()
+	{
+		// TODO Auto-generated method stub
+		return str.substring(0, 9);
+	}
+
+	@Override
+	public String fullCellText()
+	{
+		// TODO Auto-generated method stub
+		return str;
+	}
+
+}
