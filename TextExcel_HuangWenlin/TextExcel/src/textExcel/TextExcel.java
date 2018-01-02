@@ -20,6 +20,8 @@ public class TextExcel
 		
 		// a string to store the commands
 		System.out.print("Welcome to Wenlin's spreadsheet (type quit to ext)? ");
+		System.out.println();
+		// System.out.println(sheet.getGridText());
         for(;;) {
             
             String command = console.nextLine();
@@ -27,7 +29,7 @@ public class TextExcel
                 System.out.println("See you next time!");
             	break;	
             }
-            sheet.processCommand(command);
+            System.out.println(sheet.processCommand(command));
             System.out.print("Please keep typing your command: ");
         }
 	}

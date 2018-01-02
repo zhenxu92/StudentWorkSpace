@@ -1,23 +1,26 @@
 package textExcel;
 
-public class EmptyCell implements Cell
+public class TextCell implements Cell
 {
-	public EmptyCell() {
-		
+	// data field
+	public String str;
+	
+	public TextCell(String input) {
+		this.str = input;
 	}
 	
 	@Override
 	public String abbreviatedCellText()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return str.substring(0, 9);
 	}
 
 	@Override
 	public String fullCellText()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return str;
 	}
 
 }
