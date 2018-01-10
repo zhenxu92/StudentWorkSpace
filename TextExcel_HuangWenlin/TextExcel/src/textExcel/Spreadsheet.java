@@ -8,9 +8,12 @@ public class Spreadsheet implements Grid
 	Cell[][] sheet;
 	
 	public Spreadsheet() {
-		sheet = new EmptyCell[20][12];
-		// test
-		// System.out.println(sheet[0][0].fullCellText());
+		sheet = new Cell[20][12];
+		for (int i = 0; i < sheet.length; i++) {
+			for (int j = 0; j < sheet[0].length; j++) {
+				sheet[i][j] = new EmptyCell();
+			}
+		}
 	}
 	
 	@Override
@@ -21,7 +24,11 @@ public class Spreadsheet implements Grid
 		if (commands.length == 1) {
 			if (command.equals("clear")) {
 				// clear sheet
-				sheet = new EmptyCell[20][12];
+				for (int i = 0; i < sheet.length; i++) {
+					for (int j = 0; j < sheet[0].length; j++) {
+						sheet[i][j] = new EmptyCell();
+					}
+				}
 				return this.getGridText();
 			} else {
 				// inspect a certain cell
@@ -31,18 +38,17 @@ public class Spreadsheet implements Grid
 		} else if (commands.length == 2) {
 			// clear some cell
 			SpreadsheetLocation loc = new SpreadsheetLocation(commands[1]);
-			sheet[loc.getRow()][loc.getCol()] = new EmptyCell();
-			this.getGridText();
+			sheet[loc.getRow() - 1][loc.getCol()] = new EmptyCell();
+			return this.getGridText();
 		} else if (commands.length == 3) {
 			// assign a new string to some cell
 			SpreadsheetLocation loc = new SpreadsheetLocation(commands[0]);
 			String content = commands[2].substring(1, commands[2].length() - 2);
-			sheet[loc.getRow()][loc.getCol()] = new TextCell(content);
+			sheet[loc.getRow() - 1][loc.getCol()] = new TextCell(content);
 			return this.getGridText();
 		} else {
 			return null;
 		}
-		return null;
 	}
 
 	@Override
@@ -95,7 +101,11 @@ public class Spreadsheet implements Grid
                 if (((EmptyCell) (sheet[i][j])).abbreviatedCellText() == null) {
                     gridText += "|          ";                	
                 } else {
+			int len = sheet[i][j].abbreviatedCellText().length();
                 	gridText += "|" + sheet[i][j].abbreviatedCellText();
+			for (int i = 0; i < 10 - len; i++) {
+				gridText += " ";
+			}
                 }
 
             }
